@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tek and Praew</title>
+    <style>
+      /* Custom Fonts */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: linear-gradient(45deg, #fff1eb, #fad0c4, #ff9a9e);
+        min-height: 100vh;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      /* Magic Particles */
+      .particles {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* Header Section - Mickey Magic */
+      #header {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        perspective: 1000px;
+      }
+
+      .magic-title {
+        font-family: "Waltograph", cursive;
+        font-size: 8rem;
+        color: #fff;
+        text-shadow: 0 0 30px rgba(255, 62, 121, 0.8);
+        position: relative;
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .magic-title::before,
+      .magic-title::after {
+        content: "";
+        position: absolute;
+        width: 1.2em;
+        height: 1.2em;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+        box-shadow: 0 0 30px rgba(255, 62, 121, 0.5);
+        z-index: -1;
+        animation: pulse 2s infinite;
+      }
+
+      .magic-title::before {
+        left: -0.8em;
+        top: -0.8em;
+      }
+
+      .magic-title::after {
+        right: -0.8em;
+        top: -0.8em;
+      }
+
+      /* Anniversary Section */
+      #anniversary {
+        background: #ff9a9e;
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        margin: 200px auto;
+        padding: 40px;
+        max-width: 800px;
+        transform-style: preserve-3d;
+        z-index: 2;
+      }
+
+      #anniversary h2 {
+        font-family: "Pacifico", cursive;
+        font-size: 5rem;
+        color: #fff;
+        text-align: center;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        animation: textGlow 2s ease-in-out infinite;
+      }
+
+      /* Enchanted Gallery */
+      #gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        padding: 20px;
+        position: relative;
+        z-index: 1000;
+      }
+
+      .gallery-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 15px;
+        transition: all 0.5s ease;
+        cursor: pointer;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      /* .gallery-img:hover {
+        transform: scale(1.05) rotate(-2deg);
+        box-shadow: 0 15px 30px rgba(255, 62, 121, 0.4);
+      } */
+
+      /* Fairy Tale Card */
+      #card {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.9),
+          rgba(255, 236, 240, 0.5)
+        );
+        border-radius: 20px;
+        padding: 40px;
+        max-width: 800px;
+        margin: 200px auto;
+        position: relative;
+        transform: rotate(-1deg);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        border: 3px solid #fff;
+      }
+
+      #card::before {
+        content: "";
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        right: -20px;
+        bottom: -20px;
+        background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+        z-index: -1;
+        border-radius: 30px;
+        opacity: 0.3;
+      }
+
+      .card-content {
+        font-family: "Pacifico", cursive;
+        color: #6b4a4a;
+        font-size: 1.5rem;
+        line-height: 1.6;
+        position: relative;
+      }
+
+      .card-content h3 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        color: #ff5f7e;
+        text-align: center;
+      }
+
+      /* Character Decorations */
+      .character {
+        position: fixed;
+        z-index: 0;
+        pointer-events: none;
+        filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.2));
+      }
+
+      #mickey-left {
+        width: 200px;
+        bottom: 50px;
+        left: 50px;
+        animation: float 4s ease-in-out infinite;
+      }
+
+      #snoopy-right {
+        width: 180px;
+        top: 100px;
+        right: 50px;
+        animation: float 3s ease-in-out infinite 1s;
+      }
+
+      /* Animations */
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          opacity: 0.8;
+        }
+        50% {
+          transform: scale(1.1);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 0.8;
+        }
+      }
+
+      @keyframes textGlow {
+        0%,
+        100% {
+          text-shadow: 0 0 20px rgba(255, 62, 121, 0.8);
+        }
+        50% {
+          text-shadow: 0 0 40px rgba(255, 62, 121, 1);
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .magic-title {
+          font-size: 4rem;
+        }
+        #anniversary h2 {
+          font-size: 3rem;
+        }
+        .character {
+          width: 120px;
+        }
+        #mickey-left {
+          left: 20px;
+          bottom: 20px;
+        }
+        #snoopy-right {
+          right: 20px;
+          top: 20px;
+        }
+      }
+      .music-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2em;
+        z-index: 9999;
+        cursor: pointer;
+        transition: opacity 0.5s;
+      }
+
+      .music-overlay.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .gallery-img {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 0.8s ease;
+      }
+
+      .gallery-img.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      /* เพิ่ม CSS สำหรับ animation */
+      #anniversary,
+      #card-section {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      #anniversary.visible,
+      #card-section.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      /* เพิ่มเอฟเฟกต์พารัลแลกซ์ */
+      .parallax-layer {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      /* เอฟเฟกต์ประกายดาว */
+      .sparkles {
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="%23ffffff" d="M512 255.1c0 11.34-7.406 20.86-18.44 23.64l-171.3 42.78l42.78 171.1C365.7 504.6 356.2 512 344.9 512c-2.781 0-5.594-.4687-8.281-1.406l-171.1-42.78l-42.78 171.1C103.7 504.6 94.25 512 82.92 512c-1.906 0-3.875-.3125-5.797-.9375c-11.72-3.828-19.77-14.28-19.77-26.16l42.78-171.1L4.405 264.4C-2.1 254.8-1.313 242.3 6.918 236.1S26.16 231.7 33.92 237.6l171.1 128.7l68.69-171.1c4.406-10.97 16.59-16.41 27.56-12c10.97 4.406 16.41 16.59 12 27.56l-68.69 171.1l171.1-128.7c7.781-5.875 18.94-5.062 24.81 2.719C512.9 237.2 512 246.5 506.1 254.2L512 255.1z"/></svg>');
+        animation: sparkle 8s linear infinite;
+        opacity: 0.3;
+      }
+
+      /* เอฟเฟกต์ข้อความ 3D */
+      .magic-title {
+        transform-style: preserve-3d;
+        text-shadow: 0 0 30px rgba(255, 62, 121, 0.8), 4px 4px 0 #ff3e79,
+          8px 8px 0 #ff9a9e;
+        animation: float 3s ease-in-out infinite, text3D 5s linear infinite;
+      }
+
+      /* เอฟเฟกต์เมาส์ */
+      .custom-cursor {
+        width: 30px;
+        height: 30px;
+        border: 2px solid #ff3e79;
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        mix-blend-mode: difference;
+        transition: transform 0.3s;
+      }
+
+      /* เอฟเฟกต์ภาพในแกลเลอรี่ */
+      .gallery-img {
+        transition: clip-path 0.5s ease, transform 0.5s ease;
+      }
+
+      .gallery-img:hover {
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+        transform: scale(1.05) rotate(0deg);
+      }
+
+      /* เอฟเฟกต์การ์ด */
+      #card {
+        animation: cardGlow 2s ease infinite;
+      }
+
+      /* เพิ่ม keyframes */
+      @keyframes sparkle {
+        0% {
+          transform: rotate(0deg) scale(0.8);
+        }
+        100% {
+          transform: rotate(360deg) scale(1.2);
+        }
+      }
+
+      @keyframes text3D {
+        0%,
+        100% {
+          transform: rotateX(0deg) rotateY(0deg);
+        }
+        25% {
+          transform: rotateX(5deg) rotateY(5deg);
+        }
+        50% {
+          transform: rotateX(-5deg) rotateY(-5deg);
+        }
+        75% {
+          transform: rotateX(5deg) rotateY(-5deg);
+        }
+      }
+
+      @keyframes cardGlow {
+        0%,
+        100% {
+          box-shadow: 0 0 30px rgba(255, 62, 121, 0.3);
+        }
+        50% {
+          box-shadow: 0 0 60px rgba(255, 62, 121, 0.6);
+        }
+      }
+      /* Existing 768px query */
+      @media (max-width: 768px) {
+        /* ... keep existing styles ... */
+      }
+
+      /* 390px - Mobile Portrait */
+      @media (max-width: 390px) {
+        .magic-title {
+          font-size: 3.5rem;
+          text-shadow: 0 0 20px rgba(255, 62, 121, 0.8), 2px 2px 0 #ff3e79,
+            4px 4px 0 #ff9a9e;
+        }
+
+        #anniversary h2 {
+          font-size: 2.5rem;
+        }
+
+        #gallery {
+          grid-template-columns: 1fr;
+          gap: 10px;
+          padding: 10px;
+        }
+
+        .character {
+          width: 100px;
+        }
+
+        #mickey-left {
+          left: 10px;
+          bottom: 10px;
+        }
+
+        #snoopy-right {
+          right: 10px;
+          top: 10px;
+        }
+
+        #card {
+          padding: 20px;
+          max-width: 90%;
+        }
+
+        .card-content {
+          font-size: 1rem;
+        }
+
+        #anniversary {
+          margin: 50px auto;
+          padding: 20px;
+          max-width: 90%;
+        }
+      }
+
+      /* 844px - Mobile Landscape/Tablet Portrait */
+      @media (min-width: 391px) and (max-width: 844px) {
+        .magic-title {
+          font-size: 5rem;
+        }
+
+        #anniversary h2 {
+          font-size: 3.5rem;
+        }
+
+        #gallery {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .character {
+          width: 150px;
+        }
+
+        #card {
+          max-width: 90%;
+          padding: 30px;
+        }
+
+        .card-content {
+          font-size: 1.2rem;
+        }
+
+        #anniversary {
+          margin: 100px auto;
+          padding: 30px;
+        }
+      }
+
+      /* 1024px - Tablet Landscape */
+      @media (min-width: 845px) and (max-width: 1024px) {
+        .magic-title {
+          font-size: 6rem;
+        }
+
+        #anniversary h2 {
+          font-size: 4rem;
+        }
+
+        .character {
+          width: 180px;
+        }
+
+        #card {
+          max-width: 85%;
+        }
+
+        #anniversary {
+          margin: 150px auto;
+        }
+      }
+
+      /* 1366px - Small Desktop */
+      @media (min-width: 1025px) and (max-width: 1366px) {
+        .magic-title {
+          font-size: 7rem;
+        }
+
+        #anniversary h2 {
+          font-size: 4.5rem;
+        }
+
+        .character {
+          width: 200px;
+        }
+      }
+
+      /* Large Desktop */
+      @media (min-width: 1367px) {
+        .magic-title {
+          font-size: 8rem;
+        }
+
+        #anniversary h2 {
+          font-size: 5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Magic Particles -->
+    <div class="particles"></div>
+
+    <!-- Animated Characters -->
+    <img
+      src="https://i.pinimg.com/originals/c2/1f/b3/c21fb310a84a3a7145d3f258c998d782.gif"
+      class="character"
+      id="mickey-left"
+    />
+    <img
+      src="https://media4.giphy.com/media/fOqzMnu0EhxmM/200w.gif?cid=6c09b952isymmhdbsiow6mfdu7o4e2nn79mmin1j8h1i2wuz&ep=v1_gifs_search&rid=200w.gif&ct=g"
+      class="character"
+      id="snoopy-right"
+    />
+
+    <!-- Sections -->
+    <section id="header">
+      <h1 id="header-text" class="magic-title">To Praew</h1>
+    </section>
+
+    <section id="anniversary">
+      <h2 id="anniversary-text">5th Anniversary</h2>
+    </section>
+
+    <section id="gallery-section">
+      <div id="gallery">
+        <!-- ใส่ URL รูปภาพของพวกคุณที่นี่ -->
+        <img class="gallery-img" src="./images/VID_20250305_125951_180.gif" />
+        <img class="gallery-img" src="./images/IMG_20250306_035009_286.jpg" />
+        <img class="gallery-img" src="./images/IMG_20250306_035022_787.jpg" />
+        <img class="gallery-img" src="./images/IMG_20250306_035138_620.jpg" />
+        <img class="gallery-img" src="./images/IMG_20250306_035757_569.webp" />
+        <img class="gallery-img" src="./images/1741208729390.gif" />
+
+        <!-- เพิ่มรูปตามต้องการ -->
+      </div>
+    </section>
+
+    <section id="card-section">
+      <div id="card">
+        <div class="card-content">
+          <!-- ใส่ข้อความอวยพรของคุณที่นี่ -->
+          <h3>ถึงแพรว</h3>
+          <p id="typing-text">
+            <span id="text-content">
+              แม้ปีนี้เราจะเป็นเพื่อนกัน
+              แต่วันนี้ก็ยังเป็นวันสำคัญสำหรับเค้าอยู่นะ
+              ขอโทษที่ผ่านมาทำตัวแย่ๆใส่เธอ ละเลยเธอ
+              เค้ากำลังปรับปรุงตัวให้ดีขึ้น เค้าหวังว่าเธอจะใจอ่อนให้นะ
+              ยังรออยู่ตรงนี้เสมอ เป็นกำลังใจให้ทุกเรื่อง คอยซัพพอร์ตลอด
+              เค้าจะทำให้ดีที่สุด ขอให้คนเก่งของเค้าสอบผ่าน เพี้ยง<br />
+              สุดท้ายนี้อยากให้เธอรู้ว่า เค้ารักเธอนะ คิดถึงมากๆ<br /><br />
+              เทค
+            </span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div id="music-overlay" class="music-overlay">
+      <p>🎵 คลิกที่ใดก็ได้เพื่อเริ่มเสียงเพลง ✨</p>
+    </div>
+
+    <iframe
+      id="bgMusic"
+      width="0"
+      height="0"
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen
+    ></iframe>
+
+    <script>
+      // เพิ่มพารามิเตอร์แบบสุ่มทุกครั้งที่โหลดหน้า
+      function generateNewYoutubeUrl() {
+        const videoId = "N6uDZw7-3z8"; // เปลี่ยนเป็น ID วิดีโอของคุณ
+        const params = new URLSearchParams({
+          autoplay: 1,
+          loop: 1,
+          playlist: videoId,
+          mute: 0,
+          controls: 0,
+          rel: 0,
+          modestbranding: 1,
+          enablejsapi: 1,
+          origin: window.location.origin,
+        });
+        return `https://www.youtube.com/embed/${videoId}?${params.toString()}&rand=${Math.random()}`;
+      }
+
+      // ระบบควบคุมเพลง
+      function initMusic() {
+        const bgMusic = document.getElementById("bgMusic");
+        const overlay = document.getElementById("music-overlay");
+
+        // อัพเดท URL ทุกครั้งที่โหลดหน้า
+        bgMusic.src = generateNewYoutubeUrl();
+
+        // ตรวจสอบสถานะการเล่นอัตโนมัติ
+        let isPlaying = false;
+
+        // ลองเล่นเพลงอัตโนมัติ
+        setTimeout(() => {
+          if (!isPlaying) {
+            overlay.classList.remove("hidden");
+          }
+        }, 2000);
+
+        // เริ่มเล่นเมื่อคลิก overlay
+        overlay.addEventListener("click", () => {
+          bgMusic.contentWindow.postMessage(
+            '{"event":"command","func":"playVideo","args":""}',
+            "*"
+          );
+          overlay.classList.add("hidden");
+          isPlaying = true;
+        });
+
+        // รีเซ็ตเมื่อปิดหน้า
+        window.addEventListener("beforeunload", () => {
+          bgMusic.contentWindow.postMessage(
+            '{"event":"command","func":"stopVideo","args":""}',
+            "*"
+          );
+        });
+      }
+
+      // เริ่มทำงานเมื่อหน้าเว็บโหลดเสร็จ
+      window.addEventListener("load", initMusic);
+
+      // Add Particle Effect
+      function createParticles() {
+        const particles = document.querySelector(".particles");
+        for (let i = 0; i < 50; i++) {
+          const particle = document.createElement("div");
+          particle.style.cssText = `
+              position: absolute;
+              width: ${Math.random() * 8 + 2}px;
+              height: ${Math.random() * 8 + 2}px;
+              background: rgba(255,${Math.random() * 100 + 155},${
+            Math.random() * 100 + 155
+          },${Math.random()});
+              border-radius: 50%;
+              animation: float ${Math.random() * 5 + 3}s infinite;
+              top: ${Math.random() * 100}%;
+              left: ${Math.random() * 100}%;
+            `;
+          particles.appendChild(particle);
+        }
+      }
+      createParticles();
+
+      // เพิ่มระบบตรวจจับทิศทางการเลื่อน
+      let lastScroll = 0;
+
+      function handleScroll() {
+        const currentScroll = window.pageYOffset;
+        const scrollDown = currentScroll > lastScroll;
+        lastScroll = currentScroll;
+
+        sections.forEach((section) => {
+          const sectionTop = section.getBoundingClientRect().top;
+          const sectionBottom = section.getBoundingClientRect().bottom;
+          const windowHeight = window.innerHeight;
+
+          if (scrollDown) {
+            // เลื่อนลง - แสดง element เมื่อเข้าสู่ viewport
+            if (sectionTop < windowHeight * 0.8) {
+              section.classList.add("visible");
+            }
+          } else {
+            // เลื่อนขึ้น - ซ่อน element เมื่อออกจาก viewport
+            if (sectionBottom < windowHeight * 0.2) {
+              section.classList.remove("visible");
+            }
+          }
+        });
+      }
+
+      // เพิ่ม Intersection Observer สำหรับ Gallery Images
+      const galleryImgs = document.querySelectorAll(".gallery-img");
+      const imgObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            } else {
+              entry.target.classList.remove("visible");
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      galleryImgs.forEach((img) => imgObserver.observe(img));
+
+      // ระบบอื่นๆ คงเดิม
+      window.addEventListener("scroll", handleScroll);
+      window.addEventListener("load", initMusic);
+      createParticles();
+
+      // ระบบตรวจสอบการเลื่อนแบบไฮบริด
+      const targetSections = [
+        document.getElementById("anniversary"),
+        document.getElementById("card-section"),
+      ];
+      let isScrolling = false;
+
+      function checkScroll() {
+        targetSections.forEach((section) => {
+          const sectionTop = section.getBoundingClientRect().top;
+          const sectionBottom = section.getBoundingClientRect().bottom;
+          const windowHeight = window.innerHeight;
+
+          if (
+            sectionTop < windowHeight * 0.8 &&
+            sectionBottom > windowHeight * 0.2
+          ) {
+            section.classList.add("visible");
+          } else {
+            section.classList.remove("visible");
+          }
+        });
+      }
+
+      // ระบบหน่วงเวลาการเลื่อน
+      window.addEventListener("scroll", () => {
+        if (!isScrolling) {
+          window.requestAnimationFrame(() => {
+            checkScroll();
+            isScrolling = false;
+          });
+          isScrolling = true;
+        }
+      });
+
+      // เรียกครั้งแรกเมื่อโหลดหน้า
+      window.addEventListener("load", checkScroll);
+      // เพิ่มเอฟเฟกต์เมาส์
+      document.addEventListener("mousemove", (e) => {
+        const cursor = document.querySelector(".custom-cursor");
+        cursor.style.left = `${e.clientX - 15}px`;
+        cursor.style.top = `${e.clientY - 15}px`;
+
+        // เอฟเฟกต์เมื่อโฮเวอร์องค์ประกอบ
+        const hoverElements = document.querySelectorAll(
+          "a, button, .gallery-img"
+        );
+        hoverElements.forEach((el) => {
+          el.addEventListener("mouseenter", () => {
+            cursor.style.transform = "scale(1.5)";
+          });
+          el.addEventListener("mouseleave", () => {
+            cursor.style.transform = "scale(1)";
+          });
+        });
+      });
+
+      // เพิ่มเอฟเฟกต์คอนเฟตติ
+      function createConfetti() {
+        const colors = ["#ff3e79", "#ff9a9e", "#ffffff"];
+        for (let i = 0; i < 100; i++) {
+          const confetti = document.createElement("div");
+          confetti.style.cssText = `
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: ${colors[Math.floor(Math.random() * colors.length)]};
+      border-radius: 50%;
+      animation: 
+        confettiFall ${Math.random() * 3 + 2}s linear infinite,
+        confettiSpin ${Math.random() * 2 + 1}s linear infinite;
+      left: ${Math.random() * 100}%;
+      top: -10px;
+      z-index: 9999;
+      pointer-events: none;
+    `;
+          document.body.appendChild(confetti);
+        }
+      }
+
+      // เรียกใช้คอนเฟตติเมื่อโหลดหน้า
+      window.addEventListener("load", () => {
+        createConfetti();
+        setTimeout(() => {
+          document
+            .querySelectorAll('[style*="confetti"]')
+            .forEach((el) => el.remove());
+        }, 5000);
+      });
+
+      // เพิ่ม keyframes สำหรับคอนเฟตติ
+      const styleSheet = document.createElement("style");
+      styleSheet.textContent = `
+  @keyframes confettiFall {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(100vh) rotate(720deg); }
+  }
+  @keyframes confettiSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+`;
+      document.head.appendChild(styleSheet);
+      // เพิ่มเอฟเฟกต์อินเตอร์แอคทีฟ
+      document.addEventListener("mousemove", (e) => {
+        const hearts = document.createElement("div");
+        hearts.style.cssText = `
+          position: fixed;
+          left: ${e.clientX}px;
+          top: ${e.clientY}px;
+          width: 20px;
+          height: 20px;
+          background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23ff3e79" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
+          animation: heartFloat 1.5s ease-out;
+          pointer-events: none;
+        `;
+        document.body.appendChild(hearts);
+        setTimeout(() => hearts.remove(), 1500);
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const text = document.getElementById("text-content").innerText;
+        const typingText = document.getElementById("typing-text");
+        typingText.innerHTML = "";
+        let index = 0;
+
+        function type() {
+          if (index < text.length) {
+            typingText.innerHTML += text.charAt(index);
+            index++;
+            setTimeout(type, 100); // Adjust the speed by changing the timeout value
+          }
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              type();
+              observer.unobserve(entry.target); // หยุดสังเกตเมื่อเริ่มพิมพ์แล้ว
+            }
+          });
+        });
+
+        observer.observe(typingText);
+      });
+      document.addEventListener("DOMContentLoaded", function () {
+        const anniversaryText = document.getElementById("anniversary-text");
+        const text = anniversaryText.textContent;
+        anniversaryText.textContent = "";
+        let index = 0;
+
+        function type() {
+          if (index < text.length) {
+            anniversaryText.textContent += text.charAt(index);
+            index++;
+            setTimeout(type, 100); // ปรับความเร็วในการพิมพ์ได้ที่นี่
+          }
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              type();
+              observer.unobserve(entry.target); // หยุดสังเกตเมื่อเริ่มพิมพ์แล้ว
+            }
+          });
+        });
+
+        observer.observe(anniversaryText);
+      });
+      document.addEventListener("DOMContentLoaded", function () {
+        const headerText = document.getElementById("header-text");
+        const text = headerText.textContent; // ใช้ textContent แทน innerText
+        headerText.textContent = "";
+        let index = 0;
+
+        function type() {
+          if (index < text.length) {
+            headerText.textContent += text.charAt(index);
+            index++;
+            setTimeout(type, 100); // ปรับความเร็วในการพิมพ์ได้ที่นี่
+          }
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              type();
+              observer.unobserve(entry.target); // หยุดสังเกตเมื่อเริ่มพิมพ์แล้ว
+            }
+          });
+        });
+
+        observer.observe(headerText);
+      });
+    </script>
+  </body>
+</html>
